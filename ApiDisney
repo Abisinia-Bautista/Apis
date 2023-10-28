@@ -1,0 +1,319 @@
+openapi: 3.0.0
+servers:
+  - description: Disney
+    url: https://localhost:8080
+info:
+  description: Api para Disney
+  version: "1.0.0"
+  title: Petición a G3 para Disney
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+paths:
+  /PeticionDisney:
+    post:
+      tags:
+        - Disney
+      summary: Ejemplo de una peticion a G3
+      operationId: addInventory
+      description: 'Parametros que recibe:'
+      parameters:
+        - in: query
+          name: canal
+          description: canal
+          example: "OS"
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: usuario
+          description: usuario
+          example: "9161821"
+          schema:
+            type: string
+        - in: query
+          name: oficina
+          description: oficina
+          example: "ACG"
+          schema:
+            type: string
+        - in: query
+          name: telefono
+          description: telefono
+          example: "6444310971"
+          schema:
+            type: integer
+        - in: query
+          name: cliente
+          description: cliente
+          schema:
+            type: string
+        - in: query
+          name: folioContratacion
+          description: folio de contratacion
+          example: "052000028492757"
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: accion
+          description: accion
+          example: "APROVISIONA"
+          schema:
+            type: string
+        - in: query
+          name: producto
+          description: producto
+          example: "SKUC3"
+          schema:
+            type: string
+        - in: query
+          name: folioG3
+          description: folioG3
+          schema:
+            type: string
+        - in: query
+          name: email
+          description: email
+          example: "camaro77g@gmail.com"
+          schema:
+            type: string
+        - in: query
+          name: virtual
+          description: virtual
+          example: "1800030295"
+          schema:
+            type: integer
+
+        - in: query
+          name: subProductID
+          description: id del sub producto
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Respuesta G3 con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaExito'
+        '204':
+          description: Respuesta G3 con error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaError'
+      requestBody:
+          description: requestBody
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+          
+components:
+  schemas:
+    InventoryItem:
+      type: object
+      required:
+        - category
+        - description
+        - feature
+        - relatedParty
+        - serviceCharacteristic
+        - serviceSpecification
+        - state
+        - supportingService
+        - type
+      properties:
+        category:
+          type: string
+          example: MobileService
+        description:
+          type: string
+          example: Mobile Line
+        feature:
+          $ref: '#/components/schemas/feature'
+        relatedParty:
+          $ref: '#/components/schemas/relatedParty'
+        serviceCharacteristic:
+          $ref: '#/components/schemas/serviceCharacteristic'
+        serviceSpecification:
+          $ref: '#/components/schemas/serviceSpecification'
+        state:
+          type: string
+          example: active
+        supportingService:
+          $ref: '#/components/schemas/supportingService'
+        type:
+          type: string
+          example: Service
+    feature: 
+      type: object
+      required: 
+        - id
+    relatedParty:
+      type: object
+      required: 
+        - id
+    serviceCharacteristic:
+      type: array
+      required:
+        - id
+        - name
+        - valueType
+        - value
+      items:
+        properties:
+          id: 
+            type: integer
+            example: 90
+          name:
+            type: string
+            example: canal
+          valueType:
+            type: string
+            example: string
+          value:
+            type: string
+            example: OS
+    serviceSpecification:
+      type: object
+      required: 
+        - id
+    supportingService:
+      type: object
+      required: 
+        - id 
+
+    RespuestaExito:
+      type: array
+      items:
+        properties:
+          canal:
+            type: string
+            example: OS
+            description: canal que pertenece
+          usuario:
+            type: string
+            example: 1202179
+            description: usuario
+          oficina:
+            type: string
+            example: WER
+            description: oficina
+          telefono:
+            type: integer
+            example: 5526469007
+            description: telefono
+          cliente:
+            type: string
+            example: ''
+            description: cliente
+          folioContratacion:
+            type: integer
+            example: 652000148095557
+            description: folio de contratacion
+          accion:
+            type: string
+            example: APROVISIONA
+            description: accion/movimiento
+          producto:
+            type: string
+            example: SKUC3
+            description: producto
+          folioG3:
+            type: string
+            example: 000000061827780
+            description: folio de g3
+          codigoRespuesta:
+            type: string
+            example: '00'
+            description: codigo que se recibio de la respuesta
+          descripcionRespuesta:
+            type: string
+            example: EXITO
+            description: descrpcion del codigo de respuesta
+          datosAdicionales:
+            type: object
+            properties:
+              virtual:
+                type: string
+                example: 1000091158
+                description: numero de virtual
+              hubTransID:
+                type: string
+                example: 16975753219501019590
+                description: ID hub
+              psi:
+                type: string
+                example: 4f1f7c6c-9fc9-4278-b6fe-dd7acda9cb4e
+
+            
+    RespuestaError:
+      type: array
+      items:
+        properties:
+          canal:
+            type: string
+            example: OS
+            description: canal que pertenece
+          usuario:
+            type: string
+            example: 9161957
+            description: usuario
+          oficina:
+            type: string
+            example: TKE
+            description: oficina
+          telefono:
+            type: integer
+            example: 9933135270
+            description: telefono
+          cliente:
+            type: string
+            example: ''
+            description: cliente
+          folioContratacion:
+            type: integer
+            example: 145000039648987
+            description: folio de contratacion
+          accion:
+            type: string
+            example: APROVISIONA
+            description: accion/movimiento
+          producto:
+            type: string
+            example: SKUC3
+            description: producto
+          folioG3:
+            type: string
+            example: 000000061876939
+            description: folio de g3
+          codigoRespuesta:
+            type: string
+            example: '01'
+            description: codigo que se recibio de la respuesta
+          descripcionRespuesta:
+            type: string
+            example: ERROR
+            description: descrpcion del codigo de respuesta
+          datosAdicionales:
+            type: object
+            properties:
+              mensajesError:
+                type: object
+                properties:
+                  mensaje:
+                    type: object
+                    properties: 
+                      clave:
+                        type: string
+                        description: clave de error
+                        example: "9999"
+                      descripcion:
+                        type: string
+                        description: descripcion del mensaje/clave
+                        example: Error desconocido
