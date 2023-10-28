@@ -22,38 +22,32 @@ paths:
         - in: query
           name: canal
           description: canal
-          example: "PISA"
           required: false
           schema:
             type: string
         - in: query
           name: usuario
           description: usuario
-          example: "9999995"
           schema:
             type: string
         - in: query
           name: oficina
           description: oficina
-          example: "APT"
           schema:
             type: string
         - in: query
           name: telefono
           description: telefono
-          example: "3396883116"
           schema:
             type: integer
         - in: query
           name: cliente
           description: cliente
-          example: 2600000998
           schema:
             type: string
         - in: query
           name: folioContratacion
           description: folio de contratacion
-          example: "536000069123598"
           schema:
             type: integer
             format: int32
@@ -62,13 +56,11 @@ paths:
         - in: query
           name: accion
           description: accion
-          example: "APROVISIONA"
           schema:
             type: string
         - in: query
           name: producto
           description: producto
-          example: "F1001"
           schema:
             type: string
         - in: query
@@ -79,13 +71,11 @@ paths:
         - in: query
           name: email
           description: email
-          example: "edgartrujillo65@hotmail.com"
           schema:
             type: string
         - in: query
           name: virtual
           description: virtual
-          example: "2600000998"
           schema:
             type: integer
 
