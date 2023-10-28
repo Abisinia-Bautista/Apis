@@ -1,0 +1,332 @@
+openapi: 3.0.0
+servers:
+  - description: McAfee
+    url: https://localhost:8080
+info:
+  description: Api para McAfee
+  version: "1.0.0"
+  title: Petición a G3 para McAfee
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+paths:
+  /PeticionMcAfee:
+    post:
+      tags:
+        - McAfee
+      summary: Ejemplo de una peticion a G3
+      operationId: addInventory
+      description: 'Parametros que recibe:'
+      parameters:
+        - in: query
+          name: canal
+          description: canal
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: usuario
+          description: usuario
+          schema:
+            type: string
+        - in: query
+          name: oficina
+          description: oficina
+          schema:
+            type: string
+        - in: query
+          name: telefono
+          description: telefono
+          schema:
+            type: integer
+        - in: query
+          name: cliente
+          description: cliente
+          schema:
+            type: string
+        - in: query
+          name: folioContratacion
+          description: folio de contratacion
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: accion
+          description: accion
+          schema:
+            type: string
+        - in: query
+          name: producto
+          description: producto
+          schema:
+            type: string
+        - in: query
+          name: folioG3
+          description: folioG3
+          schema:
+            type: string
+        - in: query
+          name: nombre
+          description: nombre
+          schema:
+            type: string
+        - in: query
+          name: apellidoPaterno
+          description: nombre
+          schema:
+            type: string
+        - in: query
+          name: apellidoMaterno
+          description: nombre
+          schema:
+            type: string
+        - in: query
+          name: correo
+          description: correo
+          schema:
+            type: string
+        - in: query
+          name: contrasena
+          description: virtual
+          schema:
+            type: string
+        - in: query
+          name: idUsuario
+          description: virtual
+          schema:
+            type: string
+
+      responses:
+        '201':
+          description: Respuesta G3 con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaExito'
+        '204':
+          description: Respuesta G3 con error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaError'
+      requestBody:
+          description: requestBody
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+          
+components:
+  schemas:
+    InventoryItem:
+      type: object
+      required:
+        - category
+        - description
+        - feature
+        - relatedParty
+        - serviceCharacteristic
+        - serviceSpecification
+        - state
+        - supportingService
+        - type
+      properties:
+        category:
+          type: string
+          example: MobileService
+        description:
+          type: string
+          example: Mobile Line
+        feature:
+          $ref: '#/components/schemas/feature'
+        relatedParty:
+          $ref: '#/components/schemas/relatedParty'
+        serviceCharacteristic:
+          $ref: '#/components/schemas/serviceCharacteristic'
+        serviceSpecification:
+          $ref: '#/components/schemas/serviceSpecification'
+        state:
+          type: string
+          example: active
+        supportingService:
+          $ref: '#/components/schemas/supportingService'
+        type:
+          type: string
+          example: Service
+    feature: 
+      type: object
+      required: 
+        - id
+    relatedParty:
+      type: object
+      required: 
+        - id
+    serviceCharacteristic:
+      type: array
+      required:
+        - id
+        - name
+        - valueType
+        - value
+      items:
+        properties:
+          id: 
+            type: integer
+            example: 90
+          name:
+            type: string
+            example: canal
+          valueType:
+            type: string
+            example: string
+          value:
+            type: string
+            example: TMXCO
+    serviceSpecification:
+      type: object
+      required: 
+        - id
+    supportingService:
+      type: object
+      required: 
+        - id 
+
+    RespuestaExito:
+      type: array
+      items:
+        properties:
+          canal:
+            type: string
+            example: TMXCO
+            description: canal que pertenece
+          usuario:
+            type: string
+            example: 9999999
+            description: usuario
+          oficina:
+            type: string
+            example: TMX
+            description: oficina
+          telefono:
+            type: integer
+            example: 5556091564
+            description: telefono
+          result:
+            type: string
+            example: Succes
+            description: resultado
+          folioContratacion:
+            type: integer
+            example: 052000011517075
+            description: folio de contratacion
+          accion:
+            type: string
+            example: AMCAF
+            description: accion/movimiento
+          producto:
+            type: string
+            example: SVAI2
+            description: producto
+          folioG3:
+            type: string
+            example: "000000000060032"
+            description: folio de g3
+          codigoRespuesta:
+            type: string
+            example: '00'
+            description: codigo que se recibio de la respuesta
+          descripcionRespuesta:
+            type: string
+            example: EXITO
+            description: descrpcion del codigo de respuesta
+          datosAdicionales:
+            type: object
+            properties:
+              idUsuario:
+                type: string
+                example: 8800000054
+                description: id del usuario
+              url:
+                type: string
+                example: https://home.mcafee.com/downloads/keycard.aspx?affid=911&culture=ES-MX&tk=oyR2ZxYfRtTy9s9IQVvv13H1aqD77WScLQ2avW3CXx08dQdocAS14IrwzUQG-akv0&tp=48
+                description: enlace url
+              mensajesError:
+                type: object
+                properties:
+                  mensaje:
+                    type: object
+                    properties: 
+                      clave:
+                        type: string
+                        description: clave de error
+                        example: "1000"
+                      descripcion:
+                        type: string
+                        description: descripcion del mensaje/clave
+                        example: Transaccion exitosa.
+              
+            
+    RespuestaError:
+      type: array
+      items:
+        properties:
+          canal:
+            type: string
+            example: TMXCO
+            description: canal que pertenece
+          usuario:
+            type: string
+            example: 9999999
+            description: usuario
+          oficina:
+            type: string
+            example: TMX
+            description: oficina
+          telefono:
+            type: integer
+            example: 5556091564
+            description: telefono
+          folioContratacion:
+            type: integer
+            example: 052000011517075
+            description: folio de contratacion
+          accion:
+            type: string
+            example: AMCAF
+            description: accion/movimiento
+          producto:
+            type: string
+            example: SVAI2
+            description: producto
+          folioG3:
+            type: string
+            example: "000000000060032"
+            description: folio de g3
+          codigoRespuesta:
+            type: string
+            example: '01'
+            description: codigo que se recibio de la respuesta
+          descripcionRespuesta:
+            type: string
+            example: ERROR
+            description: descrpcion del codigo de respuesta
+          datosAdicionales:
+            type: object
+            properties:
+              mensajesError:
+                type: object
+                properties:
+                  mensaje:
+                    type: object
+                    properties: 
+                      clave:
+                        type: string
+                        description: clave de error
+                        example: "9999"
+                      descripcion:
+                        type: string
+                        description: descripcion del mensaje/clave
+                        example: Error desconocido
