@@ -1,0 +1,378 @@
+openapi: 3.0.0
+servers:
+  - description: Claro
+    url: https://localhost:8080
+info:
+  description: Api para Claro
+  version: "1.0.0"
+  title: Petición a G3 para Claro
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+paths:
+  /PeticionClaro:
+    post:
+      tags:
+        - Claro
+      summary: Ejemplo de una peticion a G3
+      operationId: addInventory
+      description: 'Parametros que recibe:'
+      parameters:
+        - in: query
+          name: canal
+          description: canal
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: usuario
+          description: usuario
+          schema:
+            type: string
+        - in: query
+          name: oficina
+          description: oficina
+          schema:
+            type: string
+        - in: query
+          name: telefono
+          description: telefono
+          schema:
+            type: integer
+        - in: query
+          name: cliente
+          description: cliente
+          schema:
+            type: string
+        - in: query
+          name: folioContratacion
+          description: folio de contratacion
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: accion
+          description: accion
+          schema:
+            type: string
+        - in: query
+          name: producto
+          description: producto
+          schema:
+            type: string
+        - in: query
+          name: folioG3
+          description: folioG3
+          schema:
+            type: string
+        - in: query
+          name: id_promocion
+          description: id promocion
+          schema:
+            type: string
+        - in: query
+          name: correo
+          description: correo
+          schema:
+            type: string
+        - in: query
+          name: telefonoc
+          description: telefono
+          schema:
+            type: string
+        - in: query
+          name: estatus
+          description: estatus
+          schema:
+            type: string
+        - in: query
+          name: cvPaquete
+          description: clave paquete
+          schema:
+            type: string
+        - in: query
+          name: fechaContratacion
+          description: fecha de contratacion
+          schema:
+            type: string
+        - in: query
+          name: virtual
+          description: numero virtual
+          schema:
+            type: string
+        - in: query
+          name: nobre
+          description: nombre
+          schema:
+            type: string
+        - in: query
+          name: paterno
+          description: apellido paterno
+          schema:
+            type: string
+        - in: query
+          name: materno
+          description: apellido materno
+          schema:
+            type: string
+        - in: query
+          name: idUsuario
+          description: id usuario
+          schema:
+            type: string
+        - in: query
+          name: abanderamiento
+          description: abanderamiento
+          schema:
+            type: string
+
+      responses:
+        '201':
+          description: Respuesta G3 con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaExito'
+        '204':
+          description: Respuesta G3 con error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaError'
+      requestBody:
+          description: requestBody
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+          
+components:
+  schemas:
+    InventoryItem:
+      type: object
+      required:
+        - category
+        - description
+        - feature
+        - relatedParty
+        - serviceCharacteristic
+        - serviceSpecification
+        - state
+        - supportingService
+        - type
+      properties:
+        category:
+          type: string
+          example: MobileService
+        description:
+          type: string
+          example: Mobile Line
+        feature:
+          $ref: '#/components/schemas/feature'
+        relatedParty:
+          $ref: '#/components/schemas/relatedParty'
+        serviceCharacteristic:
+          $ref: '#/components/schemas/serviceCharacteristic'
+        serviceSpecification:
+          $ref: '#/components/schemas/serviceSpecification'
+        state:
+          type: string
+          example: active
+        supportingService:
+          $ref: '#/components/schemas/supportingService'
+        type:
+          type: string
+          example: Service
+    feature: 
+      type: object
+      required: 
+        - id
+    relatedParty:
+      type: object
+      required: 
+        - id
+    serviceCharacteristic:
+      type: array
+      required:
+        - id
+        - name
+        - valueType
+        - value
+      items:
+        properties:
+          id: 
+            type: integer
+            example: 90
+          name:
+            type: string
+            example: canal
+          valueType:
+            type: string
+            example: string
+          value:
+            type: string
+            example: OS
+    serviceSpecification:
+      type: object
+      required: 
+        - id
+    supportingService:
+      type: object
+      required: 
+        - id 
+
+    RespuestaExito:
+      type: array
+      items:
+        properties:
+          canal:
+            type: string
+            example: OS
+            description: canal que pertenece
+          usuario:
+            type: string
+            example: OSPSM
+            description: usuario
+          oficina:
+            type: string
+            example: ''
+            description: oficina
+          telefono:
+            type: integer
+            example: 5911003975
+            description: telefono
+          cliente:
+            type: string
+            example: ''
+            description: cliente
+          folioContratacion:
+            type: integer
+            example: '002207069'
+            description: folio de contratacion
+          accion:
+            type: string
+            example: APROVISIONA
+            description: accion/movimiento
+          producto:
+            type: string
+            example: CVPSM
+            description: producto
+          folioG3:
+            type: string
+            example: "000000061808627"
+            description: folio de g3
+          codigoRespuesta:
+            type: string
+            example: '00'
+            description: codigo que se recibio de la respuesta
+          descripcionRespuesta:
+            type: string
+            example: EXITO
+            description: descrpcion del codigo de respuesta
+          datosAdicionales:
+            type: object
+            properties:
+              id_proocion:
+                type: string
+                example: 1
+                description: id del usuario
+              correo:
+                type: string
+                example: jesbanvite.20@gmail.com
+                description: correo
+              telefono: 
+                type: string
+                example: 5911003975
+              estatus:
+                type: string
+                example: 0
+              cvPaquete:
+                type: string
+                example: PQT01
+              fechaContratacion:
+                type: string
+                example: 20231017
+              virtual:
+                type: string
+                example: ''
+              nombre:
+                type: string
+                example: ARACELI
+              paterno:
+                type: string
+                example: VITE
+              materno:
+                type: string
+                example: MENDOZA
+              idUsuario:
+                type: string
+                example: ''
+              abanderamiento:
+                type: string
+                example: ''
+              
+            
+    RespuestaError:
+      type: array
+      items:
+        properties:
+          canal:
+            type: string
+            example: OS
+            description: canal que pertenece
+          usuario:
+            type: string
+            example: OSPSM
+            description: usuario
+          oficina:
+            type: string
+            example: ''
+            description: oficina
+          telefono:
+            type: integer
+            example: 5911003975
+            description: telefono
+          folioContratacion:
+            type: integer
+            example: '002207069'
+            description: folio de contratacion
+          accion:
+            type: string
+            example: APROVISIONA
+            description: accion/movimiento
+          producto:
+            type: string
+            example: CVPSM
+            description: producto
+          folioG3:
+            type: string
+            example: "000000061808627"
+            description: folio de g3
+          codigoRespuesta:
+            type: string
+            example: '01'
+            description: codigo que se recibio de la respuesta
+          descripcionRespuesta:
+            type: string
+            example: ERROR
+            description: descrpcion del codigo de respuesta
+          datosAdicionales:
+            type: object
+            properties:
+              mensajesError:
+                type: object
+                properties:
+                  mensaje:
+                    type: object
+                    properties: 
+                      clave:
+                        type: string
+                        description: clave de error
+                        example: "9999"
+                      descripcion:
+                        type: string
+                        description: descripcion del mensaje/clave
+                        example: Error desconocido
