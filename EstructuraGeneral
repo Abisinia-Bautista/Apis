@@ -1,0 +1,533 @@
+openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
+
+  # Added by API Auto Mocking Plugin
+
+  # Added by API Auto Mocking Plugin
+
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/BAUTISTAABISINIA/ApiCompleto/1.0.0
+  - description: Amazon
+    url: https://localhost:8080
+info:
+  description: Api para Amazon
+  version: "1.0.0"
+  title: Petición a G3 para Amazon
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+paths:
+  /PeticionAmazon:
+    post:
+      tags:
+        - Amazon
+      summary: Ejemplo de una peticion a G3
+      operationId: addInventory
+      description: 'Parametros que recibe:'
+      parameters:
+        - in: query
+          name: accion
+          description: accion
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: db2
+          description: base de datos
+          schema:
+            type: string
+        - in: query
+          name: division
+          description: division a la que pertenece 
+          schema:
+            type: string
+        - in: query
+          name: domain
+          description: dominio
+          schema:
+            type: string
+        - in: query
+          name: equipo
+          description: equipo 
+          schema:
+            type: string
+        - in: query
+          name: folioContratacion
+          description: folio de contratacion
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: oficina
+          description: oficina 
+          schema:
+            type: string
+        - in: query
+          name: orden
+          description: numero de orden
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: producto
+          description: item de producto
+          schema:
+            type: string
+        - in: query
+          name: satelite
+          description: satelite
+          schema:
+            type: string
+        - in: query
+          name: telefono
+          description: numero de telefono 
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: virtual
+          description: numero virtual
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: ownid
+          description: own id
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50
+        - in: query
+          name: origen
+          description: origen
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Respuesta G3 con exito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaExito'
+        '204':
+          description: Respuesta G3 con error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespuestaError'
+      requestBody:
+          description: requestBody
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+              examples:
+                request:
+                  value:
+                    category: "MobileService"
+                    description: "Mobile Line "
+                    feature:
+                    - id: 1
+                      isBundle: false
+                      isEnabled: true
+                      name: "Voice"
+                      featureCharacteristic:
+                        - id: 1
+                          name: "VoiceFeatureCharacteristic"
+                          valueType: "object"
+                          value:
+                            - voiceStandard: "enable"
+                              voWifi: "disable"
+                              roaming: "enable"
+                              "@schemaLocation": ".../serviceSpecification/11/featureSpecification/1/VoiceFeatureCharacteristic.json"
+                              "@type": "VoiceFeatureCharacteristic"
+                          "@type": "FeatureCharacteristic"    
+                      "@type": "Feature"      
+                    - id: 2
+                      isEnabled: false
+                      name: "Data"
+                      "@type": "Feature"
+                      featureCharacteristic:
+                        - id: 75
+                          name: "isGreen"
+                          valuetype: "string"
+                          value: "enable"
+                    - id: 3
+                      isEnabled: true
+                      name: "Messaging"
+                      featureCharacteristic:
+                        - id: 74
+                          name: "incomingSMS"
+                          valuetype: "string"
+                          value: "enable"
+                        - id: 73
+                          name: "outgoingSMS"
+                          valuetype: "string"
+                          value: "enable"
+                      "@type": "Feature"    
+                          
+                    relatedParty: 
+                    - id: 78
+                      name: "TMF Telco"
+                      role: "Service Provider"
+                      "@referredType": "Organization"
+                    - id: 12
+                      name: "Jean Pontus"
+                      role: "user"
+                      "@referredType": "Individual"
+                    serviceCharacteristic:
+                    - id: 90
+                      name: "canal"
+                      valuetype: "string"
+                      value: "NMP"
+                    - id: 91
+                      name: "usuario"
+                      valuetype: "string"
+                      value: "PRO1118AUT"
+                    - id: 92
+                      name: "oficina"
+                      valuetype: "string"
+                      value: "ACG"
+                    - id: 93
+                      name: "telefono"
+                      valuetype: "integer"
+                      value: "6444121542"
+                    - id: 94
+                      name: "cliente"
+                      valuetype: "string"
+                      value: ""
+                    - id: 95
+                      name: "folioContratacion"
+                      valuetype: "string"
+                      value: "052000028479807"
+                    - id: 96
+                      name: "accion"
+                      valuetype: "string"
+                      value: "APROVISIONA"
+                    - id: 97
+                      name: "producto"
+                      valuetype: "string"
+                      value: "NFX03"
+                    - id: 98
+                      name: "folioG3"
+                      valuetype: "string"
+                      value: ""
+                    - id: 99
+                      name: "evenType"
+                      valuetype: "string"
+                      value: "New"
+                    - id: 100
+                      name: "baseOffer"
+                      valuetype: "string"
+                      value: "NFX03"
+                    - id: 101
+                      name: "email"
+                      valuetype: "string"
+                      value: "marcapr.o77@gmail.com"
+                    - id: 102
+                      name: "starDate"
+                      valuetype: "string"
+                      value: "20231017"
+                    - id: 103
+                      name: "endDate"
+                      valuetype: "string"
+                      value: "20231017"
+                    - id: 104
+                      name: "virtual"
+                      valuetype: "string"
+                      value: "6300014204"
+                    - id: 105
+                      name: "bundleOffer"
+                      valuetype: "string"
+                      value: "NFX03"
+                    - id: 106
+                      name: "nombrePaquete"
+                      valuetype: "string"
+                      value: "PAQUETE 499"
+                    - id: 107
+                      name: "saldoAdeudo"
+                      valuetype: "string"
+                      value: "720.32"
+                    - id: 108
+                      name: "Link3"
+                      valuetype: "string"
+                      value: "PQ143NFX03"
+                    - id: 109
+                      name: "disponible1"
+                      valuetype: "string"
+                      value: "EN1L0123   6300014204    0"
+                    - id: 110
+                      name: "movimiento"
+                      valuetype: "string"
+                      value: "A"
+                    - id: 111
+                      name: "url"
+                      valuetype: "string"
+                      value: ""
+                    - id: 112
+                      name: "reintento"
+                      valuetype: "string"
+                      value: ""
+                    - id: 113
+                      name: "orden"
+                      valuetype: "string"
+                      value: ""
+                    - id: 114
+                      name: "stsOS"
+                      valuetype: "string"
+                      value: "N"
+                    serviceSpecification: 
+                      id: "cfs45"
+                      name: "c_Mobile"
+                      "@type": "serviceSpecification"
+                      "@referredType": "ServiceSpecification"
+                    state: "active"
+                    supportingService:
+                      - serviceSpecification:
+                          id: "cfs89"
+                          href: ".../serviceCatalog/v4/serviceSpecification/cfs89"
+                          name: "c_MobileSupport"
+                          "@type": "serviceSpecification"
+                          "@referredType": "ServiceSpecification"
+                      - serviceCharacteristic:
+                        - id: "sd-8"
+                          name: "IMSI"
+                          valueType: "string"
+                          value: "228 01 21 76510739 "
+                        state: "active"
+                        "@type": "Service"
+                      - id: "741-853"
+                        href: "http://serverlocation:port/serviceActivationConfiguration/v4/service/741-853"
+                        "@referredType": "Service"
+                        "@type": "ServiceRef"
+                    "@type": "Service"
+                     
+components:
+  schemas:
+    InventoryItem:
+      type: object
+      required:
+        - category
+        - description
+        - feature
+        - relatedParty
+        - serviceCharacteristic
+        - serviceSpecification
+        - state
+        - supportingService
+        - type
+      properties:
+        category:
+          type: string
+          example: MobileService
+        description:
+          type: string
+          example: Mobile Line
+        feature:
+          $ref: '#/components/schemas/feature'
+        relatedParty:
+          $ref: '#/components/schemas/relatedParty'
+        serviceCharacteristic:
+          $ref: '#/components/schemas/serviceCharacteristic'
+        serviceSpecification:
+          $ref: '#/components/schemas/serviceSpecification'
+        state:
+          type: string
+          example: active
+        supportingService:
+          $ref: '#/components/schemas/supportingService'
+        "@type":
+          type: string
+          example: Service
+    feature: 
+      type: array
+  #    required: 
+  #      - id
+      items:
+        properties:
+          id: 
+            type: integer
+            description: id
+            example: 1
+          isBundle:
+            type: boolean 
+            description: bundle
+            example: false
+          isEnabled:
+            type: boolean
+            description: enable
+            example: true
+          name:
+            type: string
+            description: name
+            example: Voice
+          featureCharacteristic:
+            type: array
+            items:
+              properties:
+                id: 
+                  type: integer
+                  example: 1
+                name:
+                  type: string
+                  example: VoiceFeatureCharacteristic
+                valueType: 
+                  type: string
+                  example: object
+                value:
+                  type: array
+                  items:
+                    properties:
+                      voiceStandard:
+                        type: string
+                        example: enable
+                      vowifi:
+                        type: string
+                        example: disable
+                      roaming:
+                        type: string
+                        example: enable
+                      "@schemaLocation":
+                        type: string
+                        example: .../serviceSpecification/11/featureSpecification/1/VoiceFeatureCharacteristic.json
+                      "@type": 
+                        type: string
+                        example: VoiceFeatureCharacteristic
+                "@type": 
+                  type: string
+                  example: FeatureCharacteristic
+          "@type": 
+            type: string
+            example: Feature
+          
+    relatedParty:
+      type: array
+      items:
+        properties:
+          id:
+            type: integer
+            example: 1
+          name: 
+            type: string
+            example: TMF Telco
+          role:
+            type: string
+            example: Service Provider
+          "@referredType":
+            type: string
+            example: Organization
+
+    serviceCharacteristic:
+      type: array
+      items:
+        properties:
+          id: 
+            type: integer
+            example: 90
+          name:
+            type: string
+            example: accion
+          valueType:
+            type: string
+            example: string
+          value:
+            type: string
+            example: APROVISIONA
+    serviceSpecification:
+      type: object
+      required: 
+        - id
+    supportingService:
+      type: object
+      required: 
+        - id 
+
+    RespuestaExito:
+      type: array
+      items:
+        properties:
+          canal:
+            type: string
+            example: OS
+            description: canal que pertenece
+          usuario:
+            type: string
+            example: ''
+            description: usuario
+          oficina:
+            type: string
+            example: TMX
+            description: oficina
+          telefono:
+            type: integer
+            example: 4499174345
+            description: telefono
+          cliente:
+            type: string
+            example: ''
+            description: cliente
+          folioContratacion:
+            type: integer
+            example: 536000069481932
+            description: folio de contratacion
+          accion:
+            type: string
+            example: APROVISIONA
+            description: accion/movimiento
+          producto:
+            type: string
+            example: AMABN
+            description: producto
+          folioG3:
+            type: string
+            example: C00000025242618
+            description: folio de g3
+          codigoRespuesta:
+            type: string
+            example: '00'
+            description: codigo que se recibio de la respuesta
+          descripcionRespuesta:
+            type: string
+            example: EXITO
+            description: descrpcion del codigo de respuesta
+          datosAdicionales:
+            type: object
+            properties:
+              virtual:
+                type: string
+                example: 3700412265
+                description: numero de virtual
+              email:
+                type: string
+                example: ''
+                description: correo
+              URL:
+                type: string
+                example: 'https://b.fortumo.eu/s/763046be872265f05dfb366d3e8fb0a1/?token'
+                description: enlace url
+            
+    RespuestaError:
+      type: array
+      items:
+        properties:
+          codigo:
+            type: string
+            example: "01"
+            description: codigo de respuesta
+          descripcion:
+            type: string
+            example: "Error"
+            description: descripcion del codigo de respuesta
